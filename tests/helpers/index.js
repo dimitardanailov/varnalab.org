@@ -69,6 +69,12 @@ module.exports.getValidTransaction = function(){
   }
 }
 
+module.exports.getValidCategory = function() {
+  return {
+    'name': 'Articles'
+  }
+}
+
 module.exports.getInvalidEmail = function(){
   return 'asd';
 }
