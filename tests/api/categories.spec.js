@@ -54,6 +54,19 @@ describe("transactions", function(){
     })
   });
 
+  it("deletes category", function(next){
+    request.del({
+      uri: helpers.apiendpoint + "/categories/" + createdCategory._id,
+      json: {}
+    }, function(err, res, body){
+      expect(body).toBeDefined();
+      expect(body.result).toBeDefined();
+      expect(body.result._id).toBe(createdCategory._id);
+      expect(body.result.name).toBe("Articles");
+      next();
+    })
+  });
+
   /*** Kill Node ***/
   it('kill', function (next){ 
     helpers.kill(next);

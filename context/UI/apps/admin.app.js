@@ -1,10 +1,13 @@
 require("./boot");
 
-var TransactionsView = require("views/admin/transactions")
+var TransactionsView = require("views/admin/transactions");
 var TransactionsCollection = require("models/client/TransactionsCollection");
 
-var MembersView = require("views/admin/members")
-var MembersCollection = require("models/client/MembersCollection")
+var MembersView = require("views/admin/members");
+var MembersCollection = require("models/client/MembersCollection");
+
+var CategoriesView = require("views/admin/categories");
+var CategoriesCollection = require("models/client/CategoriesCollection")
 
 $(function(){
   app = {}; // WARNING -> global variable
@@ -13,7 +16,8 @@ $(function(){
     routes: {
       "": "showIndex",
       "transactions": "showTransactions",
-      "members":"showMembers"
+      "members":"showMembers",
+      "categories": "showCategories"
     },
     showIndex: function(){
 
@@ -28,6 +32,18 @@ $(function(){
       collection.fetch().success(function(){
         $(".currentView").empty().append(view.render().$el)  
       })
+    },
+    showCategories: function() {
+      
+      var collection = new CategoriesCollection();
+
+      var view = new CategoriesView({
+        collection: collection
+      })
+
+      collection.fetch().success(function() {
+        $('.currentView').empty().append(view.render().$el);
+      });
     },
     showMembers: function(){
       var membersCollection = new MembersCollection();
